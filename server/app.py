@@ -98,8 +98,8 @@ class MemberOnlyArticle(Resource):
     
     def get(self, id):
         if session['user_id']:
-            article = Article.query.filter(Article.is_member_only, Article.id == id).first()
-            return article, 200
+            article = Article.query.filter(Article.id == id).first()
+            return article.to_dict(), 200
         return {'message': 'You must be logged in!'}, 401
 
 api.add_resource(ClearSession, '/clear', endpoint='clear')
